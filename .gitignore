@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Xcode - dane konkretnego użytkownika
+xcuserdata/
+*.xcuserstate
+
+# Build
+build/
+DerivedData/
+
+# Swift Package Manager
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
