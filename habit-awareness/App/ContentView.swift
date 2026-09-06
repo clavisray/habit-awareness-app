@@ -17,11 +17,11 @@ struct ContentView: View {
             
             HistoryView()
                 .tabItem {
-                    Label("Treningi", systemImage: "figure.strengthtraining.traditional")
+                    Label("Statystyki", systemImage: "chart.xyaxis.line")
                 }
             StatsView()
                 .tabItem {
-                    Label("Historia treningów", systemImage: "clock.arrow.circlepath")
+                    Label("Historia", systemImage: "clock.arrow.circlepath")
                 }
         }
         .tint(.blue)
