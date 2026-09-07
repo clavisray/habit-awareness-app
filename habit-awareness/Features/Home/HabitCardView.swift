@@ -13,7 +13,7 @@ struct HabitCardView: View {
     
     var body: some View {
         HStack{
-            VStack {
+            VStack(alignment: .leading) {
                 Text(title)
                     .fontWeight(.bold)
                 Text("Dzisiaj \(count)")
