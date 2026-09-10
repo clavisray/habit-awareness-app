@@ -10,6 +10,12 @@ import SwiftUI
 struct HabitDetailView: View {
     @Binding var title: String
     @Environment(\.dismiss) var dismiss
+    @State var editedTitle: String
+    
+    init(title: Binding<String>) {
+        self._title = title
+        self._editedTitle = State(initialValue: title.wrappedValue)
+    }
 
     var body: some View {
         VStack {
@@ -23,7 +29,12 @@ struct HabitDetailView: View {
                 Spacer()
                 
                     Button("Zapisz") {
-                        
+                        let trimmedTitle = editedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                        if !trimmedTitle.isEmpty {
+                            title = trimmedTitle
+                            dismiss()
+                        }
                     }
                 }
             .padding()
@@ -38,7 +49,7 @@ struct HabitDetailView: View {
                 
                 TextField(
                     "Dodaj nowy nawyk",
-                    text: $title
+                    text: $editedTitle
                 )
                 .padding()
                 .background(.gray.opacity(0.12))
@@ -53,5 +64,5 @@ struct HabitDetailView: View {
 
 
 #Preview {
-    HabitDetailView(title: .constant("nowy"))
+    HabitDetailView(title: .constant("Podjadanie"))
 }
