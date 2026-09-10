@@ -9,6 +9,6 @@ import Foundation
 
 struct Habit: Identifiable {
     let id = UUID()
-    let title: String
+    var title: String
     var count: Int
 }
