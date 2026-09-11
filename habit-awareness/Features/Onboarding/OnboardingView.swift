@@ -17,10 +17,14 @@ struct OnboardingView: View {
             })
                 .tag(0)
             
-            HabitSelectionView()
+            HabitSelectionView(onNext: {
+                currentStep += 1
+            })
                 .tag(1)
             
-            HowItWorksView()
+            HowItWorksView(onNext: {
+                currentStep += 1
+            })
                 .tag(2)
             
         }
