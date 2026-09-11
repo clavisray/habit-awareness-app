@@ -9,6 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        
+        /*
+          !=== for future implementation ===!
+         if onboardingCompleted {
+            MainTabView()
+        } else {
+            OnboardingView()
+        }
+        
+         */
         TabView {
             HomeView()
                 .tabItem {
