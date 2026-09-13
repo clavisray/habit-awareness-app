@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
+import SwiftUI
 
 struct ContentView: View {
 
     @State private var onboardingCompleted = false
 
+    @State private var habits: [Habit] = []
+
     var body: some View {
 
         if onboardingCompleted {
 
-            MainTabView()
+            MainTabView(
+                habits: habits
+            )
 
         } else {
 
             OnboardingView(
-                onFinished: {
+                onFinished: { selectedHabits in
+
+                    habits = selectedHabits
                     onboardingCompleted = true
                 }
             )

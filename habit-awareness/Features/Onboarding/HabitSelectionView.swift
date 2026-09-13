@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HabitSelectionView: View {
 
+    @Binding var selectedHabits: [Habit]
+
     let onNext: () -> Void
 
     let availableHabits = [
@@ -32,7 +34,7 @@ struct HabitSelectionView: View {
 
             VStack(alignment: .leading, spacing: 16) {
 
-                Text("Co znowu?")
+                Text("Co znowu\nrobisz?")
                     .font(.system(size: 56, weight: .bold))
 
                 Text("Dodaj rzeczy, których robisz\nzdecydowanie za dużo.")
@@ -49,17 +51,50 @@ struct HabitSelectionView: View {
                 .frame(height: 36)
 
             ScrollView {
+
                 FlowLayout(spacing: 12) {
+
                     ForEach(availableHabits, id: \.self) { habit in
 
-                        Text(habit)
-                            .font(.headline)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(.gray.opacity(0.18))
-                            .clipShape(
-                                RoundedRectangle(cornerRadius: 14)
-                            )
+                        let isSelected = selectedHabits.contains {
+                            $0.title == habit
+                        }
+
+                        Button {
+
+                            if isSelected {
+
+                                selectedHabits.removeAll {
+                                    $0.title == habit
+                                }
+
+                            } else {
+
+                                selectedHabits.append(
+                                    Habit(
+                                        title: habit,
+                                        count: 0,
+                                        emoji: emojiForHabit(habit)
+                                    )
+                                )
+                            }
+
+                        } label: {
+
+                            Text(habit)
+                                .font(.headline)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 12)
+                                .background(
+                                    isSelected
+                                    ? Color(hex: "#a99bc8")
+                                    : .gray.opacity(0.18)
+                                )
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 14)
+                                )
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -78,7 +113,7 @@ struct HabitSelectionView: View {
 
             Spacer()
 
-            Button("Dodaj swój pierwszy nawyk") {
+            Button("Dalej") {
                 onNext()
             }
             .frame(maxWidth: .infinity)
@@ -100,15 +135,14 @@ struct HabitSelectionView: View {
             )
 
             HStack(spacing: 10) {
+
                 Circle()
                     .frame(width: 8, height: 8)
                     .foregroundStyle(.gray)
 
                 Circle()
                     .frame(width: 8, height: 8)
-                    .foregroundStyle(
-                        Color(hex: "#a99bc8")
-                    )
+                    .foregroundStyle(Color(hex: "#a99bc8"))
 
                 Circle()
                     .frame(width: 8, height: 8)
@@ -119,10 +153,51 @@ struct HabitSelectionView: View {
         .padding(.horizontal, 24)
         .padding(.bottom, 24)
     }
+
+
+    private func emojiForHabit(_ habit: String) -> String {
+
+        switch habit {
+
+        case "doomscrolling":
+            return "📱"
+
+        case "alkohol":
+            return "🍺"
+
+        case "papierosy":
+            return "🚬"
+
+        case "fast food":
+            return "🍔"
+
+        case "granie w gry":
+            return "🎮"
+
+        case "energetyki":
+            return "⚡️"
+
+        case "obgryzanie paznokci":
+            return "💅"
+
+        case "podjadanie":
+            return "🍿"
+
+        case "słodycze":
+            return "🍫"
+
+        case "impulsywne zakupy":
+            return "🛍️"
+
+        default:
+            return "⚪️"
+        }
+    }
 }
 
 #Preview {
     HabitSelectionView(
+        selectedHabits: .constant([]),
         onNext: {
             print("Dalej")
         }

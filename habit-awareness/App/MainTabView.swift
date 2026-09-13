@@ -8,20 +8,39 @@
 import SwiftUI
 
 struct MainTabView: View {
+
+    let habits: [Habit]
+
     var body: some View {
+
         TabView {
-            HomeView()
-                .tabItem {
-                    Label("Podsumowanie", systemImage: "house")
-                }
-            
+
+            HomeView(
+                initialHabits: habits
+            )
+            .tabItem {
+                Label(
+                    "Podsumowanie",
+                    systemImage: "house"
+                )
+            }
+
+
             HistoryView()
                 .tabItem {
-                    Label("Statystyki", systemImage: "chart.xyaxis.line")
+                    Label(
+                        "Statystyki",
+                        systemImage: "chart.xyaxis.line"
+                    )
                 }
+
+
             StatsView()
                 .tabItem {
-                    Label("Historia", systemImage: "clock.arrow.circlepath")
+                    Label(
+                        "Historia",
+                        systemImage: "clock.arrow.circlepath"
+                    )
                 }
         }
         .tint(.blue)
@@ -29,5 +48,18 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView()
+    MainTabView(
+        habits: [
+            Habit(
+                title: "doomscrolling",
+                count: 2,
+                emoji: "📱"
+            ),
+            Habit(
+                title: "papierosy",
+                count: 1,
+                emoji: "🚬"
+            )
+        ]
+    )
 }

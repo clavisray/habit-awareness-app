@@ -11,14 +11,17 @@ struct HomeView: View {
 
     @State private var newEvent = ""
 
-    @State private var habits: [Habit] = [
-        Habit(title: "Podjadanie", count: 0, emoji: "🍔"),
-        Habit(title: "Słodycze", count: 0, emoji: "🍫"),
-        Habit(title: "Doomscrolling", count: 0, emoji: "📱"),
-        Habit(title: "Papierosy", count: 0, emoji: "🚬")
-    ]
+    @State private var habits: [Habit]
 
     @State private var selectedHabit: Habit?
+
+    @FocusState private var isTextFieldFocused: Bool
+
+
+    init(initialHabits: [Habit]) {
+        _habits = State(initialValue: initialHabits)
+    }
+
 
     private var totalCount: Int {
         habits.reduce(0) { sum, habit in
@@ -111,5 +114,18 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(
+        initialHabits: [
+            Habit(
+                title: "doomscrolling",
+                count: 3,
+                emoji: "📱"
+            ),
+            Habit(
+                title: "słodycze",
+                count: 1,
+                emoji: "🍫"
+            )
+        ]
+    )
 }
