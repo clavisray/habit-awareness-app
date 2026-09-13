@@ -6,25 +6,32 @@
 //
 
 import SwiftUI
+import SwiftUI
 
 struct ContentView: View {
+
+    @State private var onboardingCompleted = false
+
+    @State private var habits: [Habit] = []
+
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Podsumowanie", systemImage: "house")
+
+        if onboardingCompleted {
+
+            MainTabView(
+                habits: habits
+            )
+
+        } else {
+
+            OnboardingView(
+                onFinished: { selectedHabits in
+
+                    habits = selectedHabits
+                    onboardingCompleted = true
                 }
-            
-            HistoryView()
-                .tabItem {
-                    Label("Statystyki", systemImage: "chart.xyaxis.line")
-                }
-            StatsView()
-                .tabItem {
-                    Label("Historia", systemImage: "clock.arrow.circlepath")
-                }
+            )
         }
-        .tint(.blue)
     }
 }
 
