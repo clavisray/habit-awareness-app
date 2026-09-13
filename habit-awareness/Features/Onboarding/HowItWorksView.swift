@@ -16,20 +16,20 @@ struct HowItWorksView: View {
             
             Spacer()
             
-            VStack(spacing: 16) {
-                Text("Zrobiłeś? \nKliknij+.")
-                    .font(.system(size: 56, weight: .bold))
-                
-                Text("My policzymy.")
+            VStack(alignment: .leading, spacing: 16) {
+                Text("znowu \nci się zdarzyło?")
+                    .font(.system(size: 40, weight: .bold))
+
+                Text("A my policzymy każde znowu \n i pokażemy ci, ile tego naprawdę jest.")
                     .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                Text("i skomentujemy")
+                    .foregroundStyle(Color(hex: "262629"))
+                Text("pamięć odpuszcza, liczby nie.")
                     .font(.title3)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
                     .italic()
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()
             

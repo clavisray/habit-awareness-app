@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @State private var currentStep: Int = 0
+    let onFinished: () -> Void
     
     var body : some View {
         TabView(selection: $currentStep) {
@@ -17,13 +18,13 @@ struct OnboardingView: View {
             })
                 .tag(0)
             
-            HabitSelectionView(onNext: {
+            HowItWorksView(onNext: {
                 currentStep += 1
             })
                 .tag(1)
             
-            HowItWorksView(onNext: {
-                currentStep += 1
+            HabitSelectionView(onNext: {
+                onFinished()
             })
                 .tag(2)
             
@@ -33,5 +34,9 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView()
+    OnboardingView(
+        onFinished: {
+            
+        }
+    )
 }

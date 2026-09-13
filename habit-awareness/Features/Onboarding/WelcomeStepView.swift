@@ -19,7 +19,7 @@ struct WelcomeStepView: View {
                 Text("znowu? logo")
                     .font(.system(size: 56, weight: .bold))
                 
-                Text("tracker twoich \nzłych nawyków")
+                Text("twoje złe nawyki są policzone")
                     .font(.title3)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
@@ -43,7 +43,6 @@ struct WelcomeStepView: View {
                 )
             )
             .foregroundStyle(.black)
-            .fontWeight(.bold)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             
             HStack(spacing: 10) {

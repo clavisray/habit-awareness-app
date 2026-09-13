@@ -8,33 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @State private var onboardingCompleted = false
+
     var body: some View {
-        
-        /*
-          !=== for future implementation ===!
-         if onboardingCompleted {
+
+        if onboardingCompleted {
+
             MainTabView()
+
         } else {
-            OnboardingView()
+
+            OnboardingView(
+                onFinished: {
+                    onboardingCompleted = true
+                }
+            )
         }
-        
-         */
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Podsumowanie", systemImage: "house")
-                }
-            
-            HistoryView()
-                .tabItem {
-                    Label("Statystyki", systemImage: "chart.xyaxis.line")
-                }
-            StatsView()
-                .tabItem {
-                    Label("Historia", systemImage: "clock.arrow.circlepath")
-                }
-        }
-        .tint(.blue)
     }
 }
 

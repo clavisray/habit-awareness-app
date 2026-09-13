@@ -8,30 +8,77 @@
 import SwiftUI
 
 struct HabitSelectionView: View {
+
     let onNext: () -> Void
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+
+    let availableHabits = [
+        "doomscrolling",
+        "alkohol",
+        "impulsywne zakupy",
+        "papierosy",
+        "fast food",
+        "granie w gry",
+        "energetyki",
+        "obgryzanie paznokci",
+        "podjadanie",
+        "słodycze"
     ]
-    
-    var body : some View {
+
+    var body: some View {
+
         VStack {
-            
+
             Spacer()
-            
-            VStack(spacing: 16) {
-                Text("Co znowu \nrobisz?")
+
+            VStack(alignment: .leading, spacing: 16) {
+
+                Text("Co znowu?")
                     .font(.system(size: 56, weight: .bold))
-                
-                Text("Dodaj rzeczy, których \nrobisz zdecydowanie za dużo")
+
+                Text("Dodaj rzeczy, których robisz\nzdecydowanie za dużo.")
                     .font(.title3)
-                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.secondary)
+
+                Text("A my policzymy. I tyle.")
+                    .italic()
                     .foregroundStyle(.secondary)
             }
-            
+            .frame(maxWidth: .infinity, alignment: .leading)
+
             Spacer()
-            
-            Button("Dalej") {
+                .frame(height: 36)
+
+            ScrollView {
+                FlowLayout(spacing: 12) {
+                    ForEach(availableHabits, id: \.self) { habit in
+
+                        Text(habit)
+                            .font(.headline)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(.gray.opacity(0.18))
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 14)
+                            )
+                    }
+                }
+            }
+            .frame(maxHeight: 300)
+            .mask(
+                LinearGradient(
+                    stops: [
+                        .init(color: .black, location: 0),
+                        .init(color: .black, location: 0.75),
+                        .init(color: .clear, location: 1)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+
+            Spacer()
+
+            Button("Dodaj swój pierwszy nawyk") {
                 onNext()
             }
             .frame(maxWidth: .infinity)
@@ -48,17 +95,24 @@ struct HabitSelectionView: View {
             )
             .foregroundStyle(.black)
             .fontWeight(.bold)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            
+            .clipShape(
+                RoundedRectangle(cornerRadius: 16)
+            )
+
             HStack(spacing: 10) {
                 Circle()
                     .frame(width: 8, height: 8)
+                    .foregroundStyle(.gray)
 
                 Circle()
                     .frame(width: 8, height: 8)
+                    .foregroundStyle(
+                        Color(hex: "#a99bc8")
+                    )
 
                 Circle()
                     .frame(width: 8, height: 8)
+                    .foregroundStyle(.gray)
             }
             .padding(.top, 16)
         }
