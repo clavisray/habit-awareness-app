@@ -9,15 +9,12 @@ import SwiftUI
 
 struct MainTabView: View {
 
-    let habits: [Habit]
-
     var body: some View {
 
         TabView {
 
-            HomeView(
-                initialHabits: habits
-            )
+            HomeView()            
+            
             .tabItem {
                 Label(
                     "Podsumowanie",
@@ -48,18 +45,6 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView(
-        habits: [
-            Habit(
-                title: "doomscrolling",
-                count: 2,
-                emoji: "📱"
-            ),
-            Habit(
-                title: "papierosy",
-                count: 1,
-                emoji: "🚬"
-            )
-        ]
-    )
+    MainTabView()
+        .environment(HabitsBank())
 }

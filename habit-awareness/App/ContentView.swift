@@ -5,30 +5,33 @@
 //  Created by Mateusz Boguszewski on 06/09/2026.
 //
 
-import SwiftUI
+
 import SwiftUI
 
 struct ContentView: View {
 
     @State private var onboardingCompleted = false
 
-    @State private var habits: [Habit] = []
+    @State private var habitsBank = HabitsBank()
 
     var body: some View {
 
         if onboardingCompleted {
 
-            MainTabView(
-                habits: habits
-            )
+            MainTabView()
+                .environment(habitsBank)
+            
 
         } else {
 
             OnboardingView(
                 onFinished: { selectedHabits in
 
-                    habits = selectedHabits
-                    onboardingCompleted = true
+                    habitsBank.habits = selectedHabits
+                    
+                    withAnimation(.easeInOut(duration: 0.4)) {
+                        onboardingCompleted = true
+                    }
                 }
             )
         }

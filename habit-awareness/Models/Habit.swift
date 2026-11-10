@@ -13,3 +13,9 @@ struct Habit: Identifiable {
     var count: Int
     var emoji: String
 }
+
+struct HabitEntry: Identifiable {
+    let id = UUID()
+    let habitId: UUID
+    let createdAd: Date
+}

@@ -16,7 +16,7 @@ struct WelcomeStepView: View {
             Spacer()
             
             VStack(spacing: 24) {
-                Text("znowu? logo")
+                Text("znowu?")
                     .font(.system(size: 56, weight: .bold))
                 
                 Text("twoje złe nawyki są policzone")
