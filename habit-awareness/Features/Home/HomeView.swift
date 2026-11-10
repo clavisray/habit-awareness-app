@@ -11,25 +11,21 @@ struct HomeView: View {
 
     @State private var newEvent = ""
 
-    @State private var habits: [Habit]
-
+    @Environment(HabitsBank.self) private var habitsBank
+    
     @State private var selectedHabit: Habit?
 
     @FocusState private var isTextFieldFocused: Bool
 
-
-    init(initialHabits: [Habit]) {
-        _habits = State(initialValue: initialHabits)
-    }
-
-
     private var totalCount: Int {
-        habits.reduce(0) { sum, habit in
+        habitsBank.habits.reduce(0) { sum, habit in
             sum + habit.count
         }
     }
 
     var body: some View {
+        
+        @Bindable var bank = habitsBank
 
         VStack(alignment: .leading, spacing: 12) {
 
@@ -44,7 +40,7 @@ struct HomeView: View {
 
             List {
 
-                ForEach($habits) { habit in
+                ForEach($bank.habits) { habit in
 
                     HabitCardView(
                         title: habit.wrappedValue.title,
@@ -76,7 +72,7 @@ struct HomeView: View {
 
                         if !trimmedTitle.isEmpty {
 
-                            habits.append(
+                            habitsBank.addHabit(
                                 Habit(
                                     title: trimmedTitle,
                                     count: 0,
@@ -97,11 +93,11 @@ struct HomeView: View {
         }
         .sheet(item: $selectedHabit) { selectedHabit in
 
-            if let index = habits.firstIndex(
+            if let index = habitsBank.habits.firstIndex(
                 where: { $0.id == selectedHabit.id }
             ) {
                 HabitDetailView(
-                    title: $habits[index].title
+                    title: $bank.habits[index].title
                 )
                 .presentationDetents([.medium])
             }
@@ -109,23 +105,11 @@ struct HomeView: View {
     }
 
     private func deleteHabits(at offsets: IndexSet) {
-        habits.remove(atOffsets: offsets)
+        habitsBank.habits.remove(atOffsets: offsets)
     }
 }
 
 #Preview {
-    HomeView(
-        initialHabits: [
-            Habit(
-                title: "doomscrolling",
-                count: 3,
-                emoji: "📱"
-            ),
-            Habit(
-                title: "słodycze",
-                count: 1,
-                emoji: "🍫"
-            )
-        ]
-    )
+    HomeView()
+        .environment(HabitsBank())
 }
