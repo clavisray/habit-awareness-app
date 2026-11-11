@@ -10,12 +10,11 @@ import Foundation
 struct Habit: Identifiable {
     let id = UUID()
     var title: String
-    var count: Int
     var emoji: String
 }
 
 struct HabitEntry: Identifiable {
     let id = UUID()
     let habitId: UUID
-    let createdAd: Date
+    let createdAt: Date
 }

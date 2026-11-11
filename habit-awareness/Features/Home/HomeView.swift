@@ -18,9 +18,7 @@ struct HomeView: View {
     @FocusState private var isTextFieldFocused: Bool
 
     private var totalCount: Int {
-        habitsBank.habits.reduce(0) { sum, habit in
-            sum + habit.count
-        }
+        habitsBank.entries.count
     }
 
     var body: some View {
@@ -43,12 +41,16 @@ struct HomeView: View {
                 ForEach($bank.habits) { habit in
 
                     HabitCardView(
+                        onAddEntry: {
+                            habitsBank.addEntry(for: habit.wrappedValue.id)
+                        },
+                        count: habitsBank.countEntries(for: habit.wrappedValue.id),
                         title: habit.wrappedValue.title,
-                        count: habit.count,
                         onEdit: {
                             selectedHabit = habit.wrappedValue
                         },
-                        emoji: habit.wrappedValue.emoji
+                        emoji: habit.wrappedValue.emoji,
+                        
                     )
                     .listRowSeparator(.hidden)
                 }
@@ -75,7 +77,6 @@ struct HomeView: View {
                             habitsBank.addHabit(
                                 Habit(
                                     title: trimmedTitle,
-                                    count: 0,
                                     emoji: "⚪️"
                                 )
                             )
@@ -110,6 +111,16 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
-        .environment(HabitsBank())
+    let bank = HabitsBank()
+
+    bank.addHabit(
+        Habit(title: "Doomscrolling", emoji: "📱")
+    )
+
+    bank.addHabit(
+        Habit(title: "Słodycze", emoji: "🍫")
+    )
+
+    return HomeView()
+        .environment(bank)
 }

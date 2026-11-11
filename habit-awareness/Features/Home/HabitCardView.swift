@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct HabitCardView: View {
+    
+    let onAddEntry: () -> Void
 
+    let count: Int
     let title: String
-    @Binding var count: Int
     let onEdit: () -> Void
     let emoji: String
 
@@ -30,7 +32,7 @@ struct HabitCardView: View {
             Spacer()
 
             Button("+") {
-                count += 1
+                onAddEntry()
             }
             .frame(width: 40, height: 40)
             .background(Color.blue)
@@ -49,9 +51,11 @@ struct HabitCardView: View {
 }
 
 #Preview {
-    HabitCardView(title: "Przejadanie",
-                  count: .constant(2),
-                  onEdit: {},
-                  emoji: "⚪️"
+    HabitCardView(
+        onAddEntry: {},
+        count: 3,
+        title: "Doomscrolling",
+        onEdit: {},
+        emoji: "📱"
     )
 }
