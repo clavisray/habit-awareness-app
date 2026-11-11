@@ -17,12 +17,16 @@ struct WelcomeStepView: View {
             
             VStack(spacing: 24) {
                 Text("znowu?")
-                    .font(.system(size: 56, weight: .bold))
+                    .font(.system(size: 80, weight: .bold))
+                    .italic()
+                HStack {
+                    Text("twoje złe nawyki są")
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                    Text("policzone")
+                        .italic()
+                }
                 
-                Text("twoje złe nawyki są policzone")
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
             }
             
             Spacer()
@@ -30,8 +34,11 @@ struct WelcomeStepView: View {
             Button("Dalej") {
                 onNext()
             }
+            .font(.system(size: 20, weight: .medium))
+            .foregroundStyle(.primary)
             .frame(maxWidth: .infinity)
-            .frame(height: 52)
+            .frame(height: 54)
+            .contentShape(Rectangle())
             .background(
                 LinearGradient(
                     colors: [
@@ -42,8 +49,9 @@ struct WelcomeStepView: View {
                     endPoint: .trailing
                 )
             )
-            .foregroundStyle(.black)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .foregroundStyle(.primary)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .buttonStyle(.plain)
             
             HStack(spacing: 10) {
                 Circle()

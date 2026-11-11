@@ -115,8 +115,11 @@ struct HabitSelectionView: View {
             Button("Dalej") {
                 onNext()
             }
+            .font(.system(size: 20, weight: .medium))
+            .foregroundStyle(.primary)
             .frame(maxWidth: .infinity)
-            .frame(height: 52)
+            .frame(height: 54)
+            .contentShape(Rectangle())
             .background(
                 LinearGradient(
                     colors: [
@@ -127,11 +130,9 @@ struct HabitSelectionView: View {
                     endPoint: .trailing
                 )
             )
-            .foregroundStyle(.black)
-            .fontWeight(.bold)
-            .clipShape(
-                RoundedRectangle(cornerRadius: 16)
-            )
+            .foregroundStyle(.primary)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .buttonStyle(.plain)
 
             HStack(spacing: 10) {
 
