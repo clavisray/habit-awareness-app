@@ -73,7 +73,6 @@ struct HabitSelectionView: View {
                                 selectedHabits.append(
                                     Habit(
                                         title: habit,
-                                        count: 0,
                                         emoji: emojiForHabit(habit)
                                     )
                                 )
